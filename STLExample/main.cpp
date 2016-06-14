@@ -1,7 +1,7 @@
-
+#include "include\copyright.h"
 #include "include\common.h"
 
-int main(int argc, char* argv) {
-	cout << "welcome to STL360 trainning"<< endl;
+int main(int argc, char* argv) {	
+	cout << copyinfo() << endl;
 	return 0;
 }

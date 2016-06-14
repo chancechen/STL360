@@ -17,6 +17,9 @@
     <ClInclude Include="include\common.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\copyright.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
