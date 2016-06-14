@@ -20,8 +20,12 @@
     <ClInclude Include="include\copyright.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\Student.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="code\Student.cpp">
+      <Filter>code</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
