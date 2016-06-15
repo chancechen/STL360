@@ -13,11 +13,11 @@
 #include <vector>
 #include <map>
 #include <algorithm>
+#include "student.h"
 using namespace std;
-namespace chen {
-	namespace study {
-		namespace stl360 {
 
-		}
+namespace chen {
+	namespace common {
+
 	}
 }
