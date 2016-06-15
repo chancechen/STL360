@@ -14,18 +14,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\common.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\copyright.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Student.h" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="code\Student.cpp">
-      <Filter>code</Filter>
-    </ClCompile>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
 </Project>

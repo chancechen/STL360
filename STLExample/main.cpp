@@ -1,7 +1,10 @@
-#include "include\copyright.h"
-#include "include\common.h"
+#include "common.h"
+#include "copyright.h"
+using namespace chen::common;
 
-int main(int argc, char* argv) {	
-	cout << copyinfo() << endl;
+int main(int argc, char* argv) {		
+	cout << copyinfo << endl;
+	Student *me = new Student();
+	while (me->Work());
 	return 0;
 }
