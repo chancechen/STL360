@@ -1,4 +1,4 @@
-#include "..\include\Student.h"
+#include "../include/Student.h"
 namespace chen {
 	namespace common {
 
@@ -38,7 +38,7 @@ namespace chen {
 				}
 			}
 			
-			Task::Task(const string & name, int repeate_times):name_(name),repeate_times_(repeate_times){
+			Task::Task(const string & name, int32_t repeate_times):name_(name),repeate_times_(repeate_times){
 				cout<<"success to create task=" << name_.c_str() << endl;
 			}
 			Task::~Task(){

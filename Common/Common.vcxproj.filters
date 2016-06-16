@@ -23,9 +23,15 @@
     <ClInclude Include="include\singleton.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\time.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\Student.cpp">
+      <Filter>code</Filter>
+    </ClCompile>
+    <ClCompile Include="code\time.cpp">
       <Filter>code</Filter>
     </ClCompile>
   </ItemGroup>

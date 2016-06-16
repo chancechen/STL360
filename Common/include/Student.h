@@ -35,7 +35,7 @@ namespace chen {
 			// 需要执行的任务对象
 			// @name 任务名字
 			// @repeate_times 重复执行多少次，默认是一直循环
-			Task(const string& name, int repeate_times = -1);
+			Task(const string& name, int32_t repeate_times = -1);
 			// 释放任务对象，并且释放任务中的内存
 			~Task();
 			virtual void Run() const;

@@ -1,4 +1,3 @@
-#pragma once
 // Copyright (c) 2016 chen
 // All rights reserved.
 // desc : singleton base class
@@ -6,6 +5,9 @@
 // author     :  chen
 // email      : cy_chance@hotmail.com
 // createtime : 2016/6/15
+
+#pragma once
+
 namespace chen {
 	namespace common {
 
@@ -17,7 +19,18 @@ namespace chen {
 			NoCopyable() {}
 			virtual ~NoCopyable() {}
 		};
+		template<typename TYPE, typename REFTYPE = TYPE>
+		class AutoSingleton : private NonCopyable {
+		public:
+			static REFTYPE & Instance() {
+				static TYPE s_single_obj;
+				return  s_single_obj;
+			}
 
+		protected:
+			AutoSingleton() {}
+			virtual ~AutoSingleton() {}
+		};
 		template<typename TYPE, typename PTYPE = TYPE>
 		class Singleton : private NoCopyable {
 		public:
@@ -44,6 +57,7 @@ namespace chen {
 			Singleton() {}
 			virtual ~Singleton() {}
 		}; 
+
 		template<typename TYPE, typename PTYPE> PTYPE *
 		ManualSingleton<TYPE, PTYPE>::object_ptr_ = NULL;
 		template<typename TYPE, typename PTYPE> bool
