@@ -14,9 +14,12 @@ namespace chen {
 		typedef struct tm Data;
 
 		class Time {
-		public:			
+		public:	
+			static uint64_t Tick();
+			static void Sleep(uint32_t ms);
 			static Time Now();
 			static tm* ConverToTm(uint64_t sec);
+
 			Time(int year, int month, int day, int hour, int min, int sec);
 
 			explicit Time(uint64_t ms) {
@@ -28,11 +31,8 @@ namespace chen {
 				second_ = sec;
 				millisecond_ = nsec;
 			}
-
-			static uint64_t Tick();
-			void Date(struct Date *d);
 			
-			static void Sleep(uint32_t ms);
+			void Date(struct Date *d);			
 			size_t Format(const char *fmt, char *timestr, size_t len);
 			size_t LocalTime(char *timestr, size_t len) { 	return Format("%H:%M:%S", timestr, len);	}
 			size_t LocalDateTime(char *timestr, size_t len) { return Format("%Y-%m-%d[%H:%M:%S]", timestr, len);	}

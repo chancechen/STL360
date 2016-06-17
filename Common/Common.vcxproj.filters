@@ -26,12 +26,18 @@
     <ClInclude Include="include\time.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\file.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\Student.cpp">
       <Filter>code</Filter>
     </ClCompile>
     <ClCompile Include="code\time.cpp">
+      <Filter>code</Filter>
+    </ClCompile>
+    <ClCompile Include="code\file.cpp">
       <Filter>code</Filter>
     </ClCompile>
   </ItemGroup>

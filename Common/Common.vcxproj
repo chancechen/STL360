@@ -152,11 +152,13 @@
   <ItemGroup>
     <ClInclude Include="include\common.h" />
     <ClInclude Include="include\copyright.h" />
+    <ClInclude Include="include\file.h" />
     <ClInclude Include="include\singleton.h" />
     <ClInclude Include="include\Student.h" />
     <ClInclude Include="include\time.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="code\file.cpp" />
     <ClCompile Include="code\Student.cpp" />
     <ClCompile Include="code\time.cpp" />
   </ItemGroup>
