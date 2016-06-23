@@ -29,6 +29,9 @@
     <ClInclude Include="include\file.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\log.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\Student.cpp">

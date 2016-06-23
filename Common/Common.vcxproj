@@ -153,6 +153,7 @@
     <ClInclude Include="include\common.h" />
     <ClInclude Include="include\copyright.h" />
     <ClInclude Include="include\file.h" />
+    <ClInclude Include="include\log.h" />
     <ClInclude Include="include\singleton.h" />
     <ClInclude Include="include\Student.h" />
     <ClInclude Include="include\time.h" />

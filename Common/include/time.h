@@ -11,7 +11,7 @@
 namespace chen {
 	namespace common {	
 
-		typedef struct tm Data;
+		typedef struct tm Date;
 
 		class Time {
 		public:	
