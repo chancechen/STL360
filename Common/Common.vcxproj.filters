@@ -17,9 +17,6 @@
     <ClInclude Include="include\copyright.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\Student.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\singleton.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -32,15 +29,18 @@
     <ClInclude Include="include\log.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\student.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="code\Student.cpp">
-      <Filter>code</Filter>
-    </ClCompile>
     <ClCompile Include="code\time.cpp">
       <Filter>code</Filter>
     </ClCompile>
     <ClCompile Include="code\file.cpp">
+      <Filter>code</Filter>
+    </ClCompile>
+    <ClCompile Include="code\student.cpp">
       <Filter>code</Filter>
     </ClCompile>
   </ItemGroup>
