@@ -1,7 +1,90 @@
 #include "../include/file.h"
 #include <varargs.h>
+#include <shlwapi.h>
+#include <direct.h>
 namespace chen {
 	namespace common {
+
+		void OutputInfo(const char * info) {
+			assert(info);
+			if (info == NULL)
+				return;
+			printf("%s\n", info);
+		}
+
+		void OutputFmtInfo(const char * format, ...) {
+			assert(format);
+			if (format == NULL)
+				return;			
+			va_list args;
+			va_start(args, format);
+			int ret = vfprintf(stderr, format, args);
+			va_end(args);
+			if (ret == -1)
+				return;
+		}
+
+		bool PathIsExist(const char * path) {
+			assert(path);
+			if (path)
+				return (PathFileExistsA(path) != FALSE);
+			else
+				return false;
+		}
+		File * FileOpen(const char *path, const char *mode) {
+			FileImpl *f = new FileImpl;
+			if (f) {
+				if (f->OpenFile(path, mode) < 0) {
+					delete f;
+					return NULL;
+				}
+			}
+			return f;
+		}
+		bool MakeDirectory(const char * path, bool is_hide/* = false*/) {
+			if (!path)
+				return false;
+			if (PathFileExistsA(path))
+				return true;
+			std::string directory_path(path);
+			std::string::size_type segment_offset =
+				directory_path.rfind(SI_PATH_SEPRATOR);
+			if (segment_offset != directory_path.npos) {
+				std::string parent_path = directory_path.substr(0, segment_offset);
+				if (!PathFileExistsA(parent_path.c_str())
+					&& !MakeDirectory(parent_path.c_str(), is_hide)) {
+					return false;
+				}
+			}
+			if (_mkdir(directory_path.c_str()) != 0) {
+				assert(false);
+				return false;
+			}
+			if (is_hide)
+				SetFileAttributesA(directory_path.c_str(),
+					(FILE_ATTRIBUTE_HIDDEN | FILE_ATTRIBUTE_SYSTEM));
+			return true;
+		}
+
+		std::string& WorkDiretory() {
+			char process_file[MAX_PATH];
+			int  position = GetModuleFileNameA(NULL, process_file, sizeof(process_file));
+			if (position == 0)
+				return std::string("");
+			while ((position > 0) && process_file[position] != SI_PATH_SEPRATOR)
+				--position;
+			process_file[position] = '\0';
+			return std::string(process_file);
+		}
+
+		void FileClose(File *file) {
+			assert(file);
+			if (file) {
+				FileImpl *f = reinterpret_cast<FileImpl *>(file);
+				f->Close();
+				delete f;
+			}
+		}
 
 		bool File::IsFileExist(const char* filename) {
 			return (_access(filename, 0) == 0);
@@ -11,12 +94,8 @@ namespace chen {
 			return  rename(oldname, newname) == 0;
 		}
 
-		FileImpl::FileImpl():file_handle_(nullptr) {
-		}
-
-		FileImpl::~FileImpl() {
-		}
-
+		FileImpl::FileImpl():file_handle_(nullptr) {}
+		FileImpl::~FileImpl() {}
 		int  FileImpl::OpenFile(const char *path, const char *mode) {
 			FILE* handle = nullptr;
 			int err = fopen_s(&handle, path, mode);
@@ -58,7 +137,7 @@ namespace chen {
 
 		size_t FileImpl::Write(const char* fmt, ...) {
 			va_list ap;
-			va_start(ap);
+			va_start(ap, fmt);
 			auto res = Write(fmt, ap);
 			va_end(ap);
 			return res;

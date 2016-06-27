@@ -1,6 +1,7 @@
 #include "../include/time.h"
 #include <sysinfoapi.h>
 #include <synchapi.h>
+
 namespace chen {
 	namespace common {
 		tm* Time::ConverToTm(uint64_t sec) {
@@ -13,14 +14,13 @@ namespace chen {
 			return time;
 		}
 
-		Time Time::Now() {
+		Time Time::Now() {			
 			int64_t filetime;
 			GetSystemTimeAsFileTime((LPFILETIME)&filetime);
 			Time t;
 			// Filetime is 100s of nanoseconds since January 1, 1601.
 			// Convert to nanoseconds since January 1, 1970.
 			uint64_t nano = (filetime - 116444736000000000LL) * 100LL;
-
 			t.second_ = nano / 1000000000;
 			t.millisecond_ = nano - t.second_ * 1000000000;
 			return t;
@@ -36,6 +36,11 @@ namespace chen {
 			tm.tm_sec = sec;
 
 			second_ = mktime(&tm);
+			millisecond_ = 0;
+		}
+
+		Time::Time(struct tm* d){
+			second_ = mktime(d);
 			millisecond_ = 0;
 		}
 
@@ -57,8 +62,9 @@ namespace chen {
 		}
 #endif
 
-		void Time::Date(struct Date *d) {
+		void Time::Date(struct tm* d) {
 			localtime_s((struct tm *)d, &second_);
+			
 		}
 
 		size_t Time::Format(const char *fmt, char *timestr, size_t len) {

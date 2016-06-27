@@ -21,7 +21,7 @@ namespace chen {
 			static tm* ConverToTm(uint64_t sec);
 
 			Time(int year, int month, int day, int hour, int min, int sec);
-
+			Time(struct tm* d);
 			explicit Time(uint64_t ms) {
 				second_ = ms / 1000;
 				millisecond_ = (ms % 1000) * 1000000;
@@ -32,7 +32,7 @@ namespace chen {
 				millisecond_ = nsec;
 			}
 			
-			void Date(struct Date *d);			
+			void Date(struct tm * d);
 			size_t Format(const char *fmt, char *timestr, size_t len);
 			size_t LocalTime(char *timestr, size_t len) { 	return Format("%H:%M:%S", timestr, len);	}
 			size_t LocalDateTime(char *timestr, size_t len) { return Format("%Y-%m-%d[%H:%M:%S]", timestr, len);	}

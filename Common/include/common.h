@@ -16,13 +16,17 @@
 #include <algorithm>
 #include <io.h>
 #include <time.h>
+#include <assert.h>
 #include "time.h"
 #include "student.h"
 
 using namespace std;
-
 namespace chen {
 	namespace common {
-
+#ifdef OS_WIN
+#define SI_PATH_SEPRATOR '\\'
+#else
+#define SI_PATH_SEPRATOR '/'
+#endif
 	}
 }

@@ -33,11 +33,9 @@ namespace chen {
 		public:
 			FileImpl();
 			virtual ~FileImpl();
-
 		public:
 			int  OpenFile(const char *path, const char *mode);
 			void Close();
-
 		public:
 			virtual int ReadLine(char *buf, int len);
 			virtual size_t Read(char *buf, size_t len);
@@ -45,16 +43,21 @@ namespace chen {
 			virtual size_t Write(const char* fmt, va_list ap);
 			virtual size_t Write(const char* fmt, ...);
 			virtual size_t GetSize();
-
 			virtual bool IsEof();
 			virtual bool IsError();
-
 			virtual int  Seek(size_t offset, int origin);
 			virtual int  Sync();
-
 		protected:
 			FILE*   file_handle_;
 		};
+
+		void  OutputInfo(const char * info);
+		void  OutputFmtInfo(const char * format, ...);
+		bool PathIsExist(const char * path);
+		bool MakeDirectory(const char * path, bool is_hide = false);
+		std::string& WorkDiretory();
+		File* FileOpen(const char *path, const char *mode);
+		void  FileClose(File *file);
 
 	}
 }

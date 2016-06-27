@@ -9,13 +9,19 @@
 #include "common.h"
 #include "file.h"
 #include "singleton.h"
-
+#include <varargs.h>
 namespace chen {
 	namespace common {
 
+		const size_t kMinLogSize = 16 * 1024;
+		const size_t kMaxLogSize = 32 * 1024 * 1024;
+		const size_t kMaxLogPath = 240;
+		const size_t kMaxLogSizePerLine = 2048;
+
+		char LOG_TITLE[][32] = { "XXX", "DBG", "WRN", "ERR", "FTL", "ACT" , "PLY", "XXX", "XXX", "INF", "XXX" };
 #define LOG_AP(level) \
 	va_list gap; \
-	va_start(gap, fmt); \
+	va_start(gap); \
 	DailyLog::Instance().Log(level, fmt, gap); \
 	va_end(gap)
 
@@ -46,14 +52,14 @@ namespace chen {
 
 			void SetConsole(bool print);
 
-			int  Log(uint32_t log_level, const char* fmt, ...);
-			int  Log(uint32_t log_level, const char* fmt, va_list ap);
-			int  LogNoTime(uint32_t log_level, const char* fmt, ...);
-			int  LogNoTime(uint32_t log_level, const char* fmt, va_list ap);
+			size_t  Log(uint32_t log_level, const char* fmt, ...);
+			size_t  Log(uint32_t log_level, const char* fmt, va_list ap);
+			size_t  LogNoTime(uint32_t log_level, const char* fmt, ...);
+			size_t  LogNoTime(uint32_t log_level, const char* fmt, va_list ap);
 
 		protected:
 			FileLog();
-			int  Log(uint32_t log_level, Time* t, const char* fmt, va_list ap);
+			size_t  Log(uint32_t log_level, Time* t, const char* fmt, va_list ap);
 			int  OpenLogFile(const char* filename);
 			void Close();
 

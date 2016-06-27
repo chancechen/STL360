@@ -13,14 +13,14 @@ namespace chen {
 
 		class NoCopyable {
 		private:
-			NoCopyable(const NoCopyable &);
-			const NoCopyable & operator=(const NoCopyable &);
+			NoCopyable(const NoCopyable &) {}
+			const NoCopyable & operator=(const NoCopyable &) {}
 		protected:
 			NoCopyable() {}
 			virtual ~NoCopyable() {}
 		};
 		template<typename TYPE, typename REFTYPE = TYPE>
-		class AutoSingleton : private NonCopyable {
+		class AutoSingleton : private NoCopyable {
 		public:
 			static REFTYPE & Instance() {
 				static TYPE s_single_obj;
@@ -57,6 +57,39 @@ namespace chen {
 			Singleton() {}
 			virtual ~Singleton() {}
 		}; 
+
+
+		template<typename TYPE, typename PTYPE = TYPE>
+		class ManualSingleton : private NonCopyable {
+		public:
+			static PTYPE * Instance() {
+				SI_ASSERT(!is_destroyed_);
+				if (is_destroyed_)
+					return  NULL;
+
+				if (!object_ptr_) {
+					if (!object_ptr_)
+						object_ptr_ = new TYPE();
+				}
+				return object_ptr_;
+			}
+
+			static void Destroy() {
+				if (object_ptr_) {
+					delete (object_ptr_);
+					object_ptr_ = NULL;
+					is_destroyed_ = true;
+				}
+			}
+
+		protected:
+			static bool   is_destroyed_;
+			static PTYPE*  object_ptr_;
+
+		protected:
+			ManualSingleton() {}
+			virtual ~ManualSingleton() {}
+		};
 
 		template<typename TYPE, typename PTYPE> PTYPE *
 		ManualSingleton<TYPE, PTYPE>::object_ptr_ = NULL;

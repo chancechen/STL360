@@ -43,5 +43,8 @@
     <ClCompile Include="code\student.cpp">
       <Filter>code</Filter>
     </ClCompile>
+    <ClCompile Include="code\log.cpp">
+      <Filter>code</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

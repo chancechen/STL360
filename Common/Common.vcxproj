@@ -160,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\file.cpp" />
+    <ClCompile Include="code\log.cpp" />
     <ClCompile Include="code\student.cpp" />
     <ClCompile Include="code\time.cpp" />
   </ItemGroup>
