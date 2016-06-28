@@ -1,7 +1,7 @@
 #include "../include/log.h"
 namespace chen {
 	namespace common {
-
+		char LOG_TITLE[][32] = { "XXX", "DBG", "WRN", "ERR", "FTL", "ACT" , "PLY", "XXX", "XXX", "INF", "XXX" };
 		FileLog::FileLog() : current_size_(0)	, size_limit_(0), max_file_num_(1) {
 			file_ = NULL;
 			print_ = false;
@@ -69,8 +69,6 @@ namespace chen {
 			// lock_->Unlock();
 
 			char logbuf[kMaxLogSizePerLine] = { 0 };
-			memset(logbuf, 0, sizeof(logbuf));
-
 			size_t ret = 0;
 			if (t != NULL) {
 				Date date;
@@ -178,9 +176,7 @@ namespace chen {
 				return 1;
 
 			char   newfile[512] = { 0 };
-			char   newpath[512] = { 0 };
-			memset(newfile, 0, sizeof(newfile));
-			memset(newpath, 0, sizeof(newpath));
+			char   newpath[512] = { 0 };		
 			snprintf(newpath, sizeof(newpath)	, "%s%c%04d%02d%02d"	, file_path_, SI_PATH_SEPRATOR, date.tm_year + 1900, date.tm_mon + 1, date.tm_mday);
 			if (PathIsExist(newpath) == false) {
 				MakeDirectory(newpath);

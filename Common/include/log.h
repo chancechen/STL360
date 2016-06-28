@@ -18,7 +18,6 @@ namespace chen {
 		const size_t kMaxLogPath = 240;
 		const size_t kMaxLogSizePerLine = 2048;
 
-		char LOG_TITLE[][32] = { "XXX", "DBG", "WRN", "ERR", "FTL", "ACT" , "PLY", "XXX", "XXX", "INF", "XXX" };
 #define LOG_AP(level) \
 	va_list gap; \
 	va_start(gap); \
@@ -93,11 +92,11 @@ namespace chen {
 
 		class log {
 		public:
-			log();
-			~log();
+			log() {}
+			~log() {}
 			static void Init(int level, const char* filepath, uint32_t file_size, uint32_t file_num = 0, bool print = false) {
-				//DailyLog::Instance().Init(filepath, level, file_size);
-				//DailyLog::Instance().SetConsole(print);
+				DailyLog::Instance().Init(filepath, level, file_size);
+				DailyLog::Instance().SetConsole(print);
 			}
 
 			static void ActionInit(int level, const char* filepath

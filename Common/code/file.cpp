@@ -5,6 +5,10 @@
 namespace chen {
 	namespace common {
 
+		bool FileExists(const std::string &Filename)
+		{
+			return _access(Filename.c_str(), 0) == 0;
+		}
 		void OutputInfo(const char * info) {
 			assert(info);
 			if (info == NULL)
@@ -27,7 +31,7 @@ namespace chen {
 		bool PathIsExist(const char * path) {
 			assert(path);
 			if (path)
-				return (PathFileExistsA(path) != FALSE);
+				return (FileExists(path) != FALSE);
 			else
 				return false;
 		}
@@ -44,15 +48,16 @@ namespace chen {
 		bool MakeDirectory(const char * path, bool is_hide/* = false*/) {
 			if (!path)
 				return false;
-			if (PathFileExistsA(path))
+			if (FileExists(path))
 				return true;
 			std::string directory_path(path);
-			std::string::size_type segment_offset =
-				directory_path.rfind(SI_PATH_SEPRATOR);
+			if (directory_path.size() == 0) {
+				return true;
+			}
+			auto segment_offset = directory_path.rfind(SI_PATH_SEPRATOR);
 			if (segment_offset != directory_path.npos) {
 				std::string parent_path = directory_path.substr(0, segment_offset);
-				if (!PathFileExistsA(parent_path.c_str())
-					&& !MakeDirectory(parent_path.c_str(), is_hide)) {
+				if (!FileExists(parent_path.c_str())	&& !MakeDirectory(parent_path.c_str(), is_hide)) {
 					return false;
 				}
 			}

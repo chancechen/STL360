@@ -23,10 +23,10 @@
 using namespace std;
 namespace chen {
 	namespace common {
-#ifdef OS_WIN
-#define SI_PATH_SEPRATOR '\\'
-#else
-#define SI_PATH_SEPRATOR '/'
-#endif
+#define SI_PATH_SEPRATOR '//'
+#define LOG_LEVEL 1
+#define LOG_PATH "./log"
+#define LOG_SIZE 1024*32
+
 	}
 }
